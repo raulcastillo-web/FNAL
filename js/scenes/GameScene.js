@@ -106,7 +106,7 @@ class GameScene extends Phaser.Scene {
             fontStyle: 'bold'
         }).setOrigin(0.5);
 
-        // Opciones
+        // Opciones - CORREGIDO
         this.optionsTexts = [];
         const optionY = 350;
         const optionX = [250, 650];
@@ -116,21 +116,32 @@ class GameScene extends Phaser.Scene {
             const x = optionX[i % 2];
             const y = optionY + (Math.floor(i / 2) * 80);
 
+            // Crear rectángulo
             const rect = this.add.rectangle(x, y, 300, 70, parseInt(colors[i].replace('#', '0x')))
                 .setInteractive()
-                .setDepth(10);
+                .setDepth(5);  // Depth normal
 
+            // Crear texto CON MEJOR VISIBILIDAD
             const text = this.add.text(x, y, '', {
-                fontSize: '22px',
-                fill: '#000000',
+                fontSize: '28px',  // ⬆️ AUMENTADO de 22px a 28px
+                fill: '#ffffff',   // ⬆️ CAMBIADO a blanco para mejor contraste
                 fontStyle: 'bold',
-                align: 'center'
-            }).setOrigin(0.5);
+                align: 'center',
+                fontFamily: 'Arial'
+            }).setOrigin(0.5).setDepth(10);  // ⬆️ DEPTH más alto para que esté encima
 
             this.optionsTexts.push({ rect, text, index: i });
 
-            rect.on('pointerover', () => rect.setScale(1.1));
-            rect.on('pointerout', () => rect.setScale(1));
+            rect.on('pointerover', () => {
+                rect.setScale(1.1);
+                text.setFontSize(32);  // ⬆️ Texto más grande al pasar el mouse
+            });
+
+            rect.on('pointerout', () => {
+                rect.setScale(1);
+                text.setFontSize(28);  // ⬆️ Vuelve al tamaño normal
+            });
+
             rect.on('pointerdown', () => this.selectAnswer(i));
         }
 
