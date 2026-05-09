@@ -207,10 +207,17 @@ class GameScene extends Phaser.Scene {
         this.feedbackText.setText('');
 
         const options = this.currentProblem.options;
+        const letters = ['A', 'B', 'C', 'D'];
+
         this.optionsTexts.forEach((option, index) => {
-            option.text.setText(options[index]);
+            // ⬆️ MEJORADO: Agregar letra (A, B, C, D) + la opción
+            option.text.setText(`${letters[index]}) ${options[index]}`);
             option.rect.setInteractive();
             option.rect.setFillStyle(parseInt(['#ff6b6b', '#4ecdc4', '#45b7d1', '#f7b731'][index].replace('#', '0x')));
+            
+            // ⬆️ ASEGURAR que el texto sea visible
+            option.text.setVisible(true);
+            option.text.setDepth(100);
         });
     }
 
