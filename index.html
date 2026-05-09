@@ -10,12 +10,17 @@
 <body>
     <div id="gameContainer"></div>
 
-    <!-- Scripts del Juego -->
+    <!-- ¡IMPORTANTE! EL ORDEN ES CRUCIAL -->
+    <!-- 1. Primero cargar los managers -->
     <script src="js/managers/MathProblemManager.js"></script>
-    <script src="js/config.js"></script>
+    
+    <!-- 2. Después cargar TODAS las escenas -->
     <script src="js/scenes/MenuScene.js"></script>
     <script src="js/scenes/NightSelectScene.js"></script>
     <script src="js/scenes/GameScene.js"></script>
     <script src="js/scenes/GameOverScene.js"></script>
+    
+    <!-- 3. Finalmente cargar la configuración del juego -->
+    <script src="js/config.js"></script>
 </body>
 </html>
